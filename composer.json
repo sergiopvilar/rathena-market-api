@@ -1,0 +1,19 @@
+{
+    "name": "sergio/rathena-market",
+    "authors": [
+        {
+            "name": "Sergio Vilar",
+            "email": "sergiovilar.r@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.0",
+        "illuminate/database": "~5.1",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
