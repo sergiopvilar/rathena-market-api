@@ -58,9 +58,15 @@ Example buying output:
     },
     "items": [{
       "index": 0,
-      "item_id": 509,
       "amount": 50,
-      "price": 900
+      "price": 900,
+      "attributes": {
+        "item_id": 509,
+        "refine": 0,
+        "strong": 0,
+        "cards": [],
+        "elemental": ""
+      }
     }]
   }
 }
