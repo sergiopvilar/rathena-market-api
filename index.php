@@ -3,6 +3,7 @@
 use \App\Vending;
 use \App\Char;
 use \App\BuyingStore;
+use \App\BuyingItem;
 require './vendor/autoload.php';
 
 $config = require 'config.php';
@@ -15,6 +16,11 @@ $capsule->bootEloquent();
 
 $app->get('/selling', function ($request, $response) {
   return $response->withJson(Vending::get_all());
+});
+
+$app->get('/buying/{item}', function($request, $response, $args) {
+  $buying_ids = BuyingItem::where('item_id', $args['item'])->pluck('buyingstore_id');
+  return $response->withJson(BuyingStore::retrieve(BuyingStore::where('id', $buying_ids)->get()));
 });
 
 $app->get('/buying', function ($request, $response) {
