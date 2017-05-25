@@ -30,7 +30,7 @@ Retrieve all vendings in the server
 Retrieve all Buying Stores in the server
 
 #### [GET] /buying/:item_id
-Retrieve all Buying Stores who were selling the respective item. Returns also the desired item amount and price.
+Retrieve all Buying Stores who were buying the respective item. Returns also the desired item amount and price.
 
 #### [GET] /merchant/:character
 Retrieve the current store for the character, vending or buying store.
