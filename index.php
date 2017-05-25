@@ -13,6 +13,17 @@ $capsule = new Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container->get('settings')['db']);
 $capsule->bootEloquent();
 
+$app->get('/', function($request, $response) {
+  return $response->withJson((object) [
+    'buying' => BuyingStore::all()->map(function($store) {
+      return $store->load('char', 'items');
+    }),
+    'selling' => Vending::all()->map(function($store) {
+      return $store->load('char', 'items', 'items.attributes');
+    })
+  ]);
+});
+
 $app->get('/selling/{item}', function($request, $response, $args) {
   return $response->withJson(Vending::item($args['item']));
 });
