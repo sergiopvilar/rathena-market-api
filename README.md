@@ -92,6 +92,7 @@ Example selling output:
       "price": 20000,
       "attributes": {
         "refine": 0,
+        "item_id": 1110,
         "strong": 2,
         "cards": [],
         "elemental": "wind"
@@ -102,6 +103,7 @@ Example selling output:
       "price": 3000000,
       "attributes": {
         "refine": 0,
+        "item_id": 1220,
         "strong": 0,
         "cards": [4035, 4035, 4035],
         "elemental": ""

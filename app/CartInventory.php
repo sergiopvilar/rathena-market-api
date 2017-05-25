@@ -13,7 +13,7 @@ class CartInventory extends Model {
     "unique_id", "attribute", "card0", "card1", "card2", "card3"
   ];
 
-  protected $appends = ['strong', 'cards', 'elemental'];
+  protected $appends = ['item_id', 'strong', 'cards', 'elemental'];
 
   public function char() {
     return $this->belongsTo('App\Char', 'char_id');
@@ -46,6 +46,10 @@ class CartInventory extends Model {
     if(!empty($this->card3)) array_push($cards, $this->card3);
     
     return $cards;
+  }
+
+  function getItemIdAttribute() {
+    return $this->nameid;
   }
 
   function getElementalAttribute() {
