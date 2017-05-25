@@ -15,7 +15,7 @@ A simple API to retrieve market data in ragnarok online servers powered by rAthe
 
     composer install
 
-2 - Copy `.env.sample` to `.env` and fill with database access data to your emulator's database.
+2 - Copy `.env.sample` to `.env` and fill with credentials to your emulator's database.
 
 3 - Run the API:
 
