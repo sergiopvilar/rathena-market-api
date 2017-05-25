@@ -50,7 +50,13 @@ Example buying output:
     "x": 50,
     "y": 44,
     "title": "Compro evra",
-    "autotrade": false
+    "autotrade": false,
+    "items": [{
+      "index": 0,
+      "item_id": 509,
+      "amount": 50,
+      "price": 900
+    }]
   }
 }
 ```

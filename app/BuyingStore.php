@@ -29,7 +29,7 @@ class BuyingStore extends Model {
         'y' => $this->y,
         'title' => $this->title,
         'autotrade' => ($this->autotrade == 1),
-        // 'items' => VendingItem::get_all('vending_id', $this->id)
+        'items' => BuyingItem::get_all('buyingstore_id', $this->id)
       ];
   }
 
