@@ -10,9 +10,11 @@ class CartInventory extends Model {
     return $this->belongsTo('App\Char');
   }
 
+  // TODO: Figure out how it works in rAthena
   function maker() {
-    if($this->card0 != 255 && $this->card0 != 254) return '';
-    return Char::where('char_id', $this->card2 + $this->card3)->first()->name;
+    return '';
+    // if($this->card0 != 255 && $this->card0 != 254) return '';
+    // return Char::where('char_id', $this->card2 + $this->card3)->first()->name;
   }
 
   function strong() {

@@ -3,8 +3,8 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
-class Vending extends Model {
-  protected $table = 'vendings';
+class BuyingStore extends Model {
+  protected $table = 'buyingstores';
 
   protected $hidden = [
     'body_direction',
@@ -29,7 +29,7 @@ class Vending extends Model {
         'y' => $this->y,
         'title' => $this->title,
         'autotrade' => ($this->autotrade == 1),
-        'items' => VendingItem::get_all('vending_id', $this->id)
+        // 'items' => VendingItem::get_all('vending_id', $this->id)
       ];
   }
 
@@ -41,12 +41,12 @@ class Vending extends Model {
   }
 
   public static function get_all() {
-    return Vending::retrieve(Vending::all());
+    return BuyingStore::retrieve(BuyingStore::all());
   }
 
   public static function from($char_name) {
     $char_id = Char::where('name', $char_name)->first()->char_id;
-    return Vending::where('char_id', $char_id)->first()->build();
+    return BuyingStore::where('char_id', $char_id)->first()->build();
   }
 
 }
