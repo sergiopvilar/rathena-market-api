@@ -15,4 +15,8 @@ class VendingItem extends Model {
     return $this->belongsTo('App\Vending');
   }
 
+  public function attributes() {
+    return $this->belongsTo('App\CartInventory', 'cartinventory_id');
+  }
+
 }

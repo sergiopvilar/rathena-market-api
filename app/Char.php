@@ -32,7 +32,7 @@ class Char extends Model {
     if(!is_null($this->buying)) {
       $output = ['type' => 'buying', 'data' => $this->buying->load('char', 'items')];
     } else if(!is_null($this->vending)) {
-      $output = ['type' => 'vending', 'data' => $this->vending->load('char', 'items')];
+      $output = ['type' => 'vending', 'data' => $this->vending->load('char', 'items', 'items.attributes')];
     }
 
     return (object) $output;

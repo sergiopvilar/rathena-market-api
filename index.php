@@ -19,7 +19,7 @@ $app->get('/selling/{item}', function($request, $response, $args) {
 
 $app->get('/selling', function ($request, $response) {
   return $response->withJson(Vending::all()->map(function($store) {
-    return $store->load('char', 'items');
+    return $store->load('char', 'items', 'items.attributes');
   }));
 });
 

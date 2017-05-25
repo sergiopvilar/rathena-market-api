@@ -6,18 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 class CartInventory extends Model {
   protected $table = 'cart_inventory';
 
+  protected $hidden = [
+    "id", "char_id", "nameid", "amount", "equip", "identify", "option_id0", "option_val0", "option_parm0",
+    "option_id1", "option_val1", "option_parm1", "option_id2", "option_val2", "option_parm2", "option_id3",
+    "option_val3", "option_parm3", "option_id4", "option_val4", "option_parm4", "expire_time", "bound",
+    "unique_id", "attribute", "card0", "card1", "card2", "card3"
+  ];
+
+  protected $appends = ['strong', 'cards', 'elemental'];
+
   public function char() {
-    return $this->belongsTo('App\Char');
+    return $this->belongsTo('App\Char', 'char_id');
   }
 
-  // TODO: Figure out how it works in rAthena
-  function maker() {
-    return '';
-    // if($this->card0 != 255 && $this->card0 != 254) return '';
-    // return Char::where('char_id', $this->card2 + $this->card3)->first()->name;
+  public function vending_item() {
+    return $this->hasOne('App\Vending', 'cartinventory_id');
   }
 
-  function strong() {
+  function getStrongAttribute() {
     if($this->card0 != 255 && $this->card0 != 254) return 0;
     $strong = 0;
     if($this->card1 == 3840) {
@@ -30,7 +36,7 @@ class CartInventory extends Model {
     return $strong;
   }
 
-  function cards() {
+  function getCardsAttribute() {
     if($this->card0 == 255 || $this->card0 == 254) return [];
     $cards = [];
 
@@ -42,7 +48,7 @@ class CartInventory extends Model {
     return $cards;
   }
 
-  function elemental() {
+  function getElementalAttribute() {
     if($this->card0 != 255 && $this->card0 != 254) return '';
     
     $el = '';
