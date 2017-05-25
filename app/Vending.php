@@ -23,4 +23,15 @@ class Vending extends Model {
     return $this->hasMany('App\VendingItem');
   }
 
+  public static function item($item) {
+    $query = CartInventory::where('nameid', $item);
+    $inventory_ids = $query->pluck('id');
+    if($query->get()->isEmpty()) return [];
+    return Vending::whereHas('items', function ($query) use($inventory_ids) {
+      $query->where('cartinventory_id', $inventory_ids);
+    })->get()->map(function($store) {
+      return $store->load('char', 'items', 'items.attributes');
+    });
+  }
+
 }

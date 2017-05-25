@@ -24,8 +24,12 @@ class BuyingStore extends Model {
   }
 
   public static function item($item) {
-    $buying_ids = BuyingItem::where('item_id', $item)->pluck('buyingstore_id');
-    return BuyingStore::retrieve(BuyingStore::where('id', $buying_ids)->get());
+    $query = BuyingItem::where('item_id', $item);
+    $buying_ids = $query->pluck('buyingstore_id');
+    if($query->get()->isEmpty()) return [];
+    return BuyingStore::where('id', $buying_ids)->get()->map(function($store){
+      return $store->load('char', 'items');
+    });
   }
 
 }
