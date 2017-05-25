@@ -3,7 +3,6 @@
 use \App\Vending;
 use \App\Char;
 use \App\BuyingStore;
-use \App\BuyingItem;
 require './vendor/autoload.php';
 
 $config = require 'config.php';
@@ -14,41 +13,28 @@ $capsule = new Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container->get('settings')['db']);
 $capsule->bootEloquent();
 
+$app->get('/selling/{item}', function($request, $response, $args) {
+  return $response->withJson(Vending::item($args['item']));
+});
+
 $app->get('/selling', function ($request, $response) {
-  return $response->withJson(Vending::get_all());
+  return $response->withJson(Vending::all()->map(function($store) {
+    return $store->load('char', 'items');
+  }));
 });
 
 $app->get('/buying/{item}', function($request, $response, $args) {
-  $buying_ids = BuyingItem::where('item_id', $args['item'])->pluck('buyingstore_id');
-  return $response->withJson(BuyingStore::retrieve(BuyingStore::where('id', $buying_ids)->get()));
+  return $response->withJson(BuyingStore::item($args['item']));
 });
 
 $app->get('/buying', function ($request, $response) {
-  return $response->withJson(BuyingStore::get_all());
+  return $response->withJson(BuyingStore::all()->map(function($store) {
+    return $store->load('char', 'items');
+  }));
 });
 
 $app->get('/merchant/{char}', function ($request, $response, $args) {
-  $char_id = Char::where('name', $args['char'])->first()->char_id;
-  $buying = BuyingStore::where('char_id', $char_id);
-  $vending = Vending::where('char_id', $char_id);
-
-  if(!$buying->get()->isEmpty()) {
-    $output = [
-      'type' => 'buying',
-      'data' => $buying->first()->build()
-    ];
-  } else if(!$vending->get()->isEmpty()) {
-    $output = [
-      'type' => 'vending',
-      'data' => $vending->first()->build()
-    ];
-  } else {
-    $output = [
-      'data' => []
-    ];
-  }
-
-  return $response->withJson((object) $output);
+  return $response->withJson(Char::where('name', $args['char'])->first()->store());
 });
 
 $app->run();

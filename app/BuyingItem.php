@@ -10,9 +10,4 @@ class BuyingItem extends Model {
     'buyingstore_id'
   ];
 
-  public static function get_all($where1, $where2) {
-    $items = BuyingItem::where($where1, $where2)->get();
-    return $items;
-  }
-
 }

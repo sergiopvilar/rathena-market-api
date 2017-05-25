@@ -15,38 +15,17 @@ class BuyingStore extends Model {
     'account_id',
   ];
 
-  public function build() {
-    $char = Char::find($this->char_id);
-    return (object) [
-        'char' => (object) [
-          'name' => $char->name,
-          'class' => $char->class,
-          'base_level' => $char->base_level,
-          'job_level' => $char->job_level,
-         ],
-        'map' => $this->map,
-        'x' => $this->x,
-        'y' => $this->y,
-        'title' => $this->title,
-        'autotrade' => ($this->autotrade == 1),
-        'items' => BuyingItem::get_all('buyingstore_id', $this->id)
-      ];
+  public function char() {
+    return $this->belongsTo('App\Char', 'char_id');
   }
 
-  public static function retrieve($vendings) {
-    $return_objects = [];
-    foreach($vendings as $vend)
-      array_push($return_objects, $vend->build());
-    return $return_objects;
+  public function items() {
+    return $this->hasMany('App\BuyingItem', 'buyingstore_id');
   }
 
-  public static function get_all() {
-    return BuyingStore::retrieve(BuyingStore::all());
-  }
-
-  public static function from($char_name) {
-    $char_id = Char::where('name', $char_name)->first()->char_id;
-    return BuyingStore::where('char_id', $char_id)->first()->build();
+  public static function item($item) {
+    $buying_ids = BuyingItem::where('item_id', $item)->pluck('buyingstore_id');
+    return BuyingStore::retrieve(BuyingStore::where('id', $buying_ids)->get());
   }
 
 }
