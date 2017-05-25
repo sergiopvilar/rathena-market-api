@@ -23,6 +23,9 @@ A simple API to retrieve market data in ragnarok online servers powered by rAthe
 
 ## Endpoints
 
+#### [GET] /item/:item_id
+Retrieve all stores in the server that are buying or selling the item.
+
 #### [GET] /selling
 Retrieve all vendings in the server
 

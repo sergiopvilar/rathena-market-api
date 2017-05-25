@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BuyingStore extends Model {
   protected $table = 'buyingstores';
-
+  protected $appends = ['type'];
   protected $hidden = [
     'body_direction',
     'head_direction',
@@ -21,6 +21,10 @@ class BuyingStore extends Model {
 
   public function items() {
     return $this->hasMany('App\BuyingItem', 'buyingstore_id');
+  }
+
+  public function getTypeAttribute() {
+    return 'buying';
   }
 
   public static function item($item) {

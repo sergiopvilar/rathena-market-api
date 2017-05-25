@@ -33,6 +33,13 @@ $app->get('/buying', function ($request, $response) {
   }));
 });
 
+$app->get('/item/{item}', function($request, $response, $args) {
+  return $response->withJson((object) [
+    'buying' => BuyingStore::item($args['item']),
+    'selling' => Vending::item($args['item'])
+  ]);
+});
+
 $app->get('/merchant/{char}', function ($request, $response, $args) {
   return $response->withJson(Char::where('name', $args['char'])->first()->store());
 });
