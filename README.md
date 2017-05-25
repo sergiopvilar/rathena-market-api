@@ -43,17 +43,19 @@ Example buying output:
 {
   "type": "buying",
   "data": {
+    "id": 1,
+    "map": "alberta",
+    "x": 50,
+    "y": 44,
+    "title": "Compro evra",
+    "limit": 500000,
+    "autotrade": 0,
     "char": {
       "name": "MyMerchant",
       "class": 4011,
       "base_level": 1,
       "job_level": 1
     },
-    "map": "alberta",
-    "x": 50,
-    "y": 44,
-    "title": "Compro evra",
-    "autotrade": false,
     "items": [{
       "index": 0,
       "item_id": 509,
@@ -72,35 +74,38 @@ Example selling output:
 {
   "type": "vending",
   "data": {
+    "id": 2,
+    "map": "izlude",
+    "x": 130,
+    "y": 128,
+    "title": "Armas",
+    "autotrade": 0,
     "char": {
       "name": "SellingMerchant",
       "class": 4011,
       "base_level": 1,
       "job_level": 1
     },
-    "map": "izlude",
-    "x": 130,
-    "y": 128,
-    "title": "Armas",
-    "autotrade": false,
     "items": [{
-      "item_id": 1110,
+      "index": 0,
       "amount": 1,
       "price": 20000,
-      "refine": 0,
-      "created_by": "",
-      "strong": 2,
-      "element": "wind",
-      "cards": []
+      "attributes": {
+        "refine": 0,
+        "strong": 2,
+        "cards": [],
+        "elemental": "wind"
+      }
     }, {
-      "item_id": 1220,
+      "index": 1,
       "amount": 1,
       "price": 3000000,
-      "refine": 0,
-      "created_by": "",
-      "strong": 0,
-      "element": "",
-      "cards": [4035, 4035, 4035]
+      "attributes": {
+        "refine": 0,
+        "strong": 0,
+        "cards": [4035, 4035, 4035],
+        "elemental": ""
+      }
     }]
   }
 }
