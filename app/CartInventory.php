@@ -13,7 +13,7 @@ class CartInventory extends Model {
     "unique_id", "attribute", "card0", "card1", "card2", "card3"
   ];
 
-  protected $appends = ['item_id', 'strong', 'cards', 'elemental'];
+  protected $appends = ['item_id', 'strong', 'cards', 'elemental', 'created_by'];
 
   public function char() {
     return $this->belongsTo('App\Char', 'char_id');
@@ -21,6 +21,13 @@ class CartInventory extends Model {
 
   public function vending_item() {
     return $this->hasOne('App\Vending', 'cartinventory_id');
+  }
+
+  function getCreatedByAttribute() {
+    if($this->card0 != 255 && $this->card0 != 254) return '';
+    $char_id = ($this->card3<<16) | $this->card2;
+    $char = Char::find($char_id);
+    return is_null($char) ? 'unknown' : $char->name;
   }
 
   function getStrongAttribute() {
