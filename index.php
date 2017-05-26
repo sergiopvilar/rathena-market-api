@@ -52,7 +52,8 @@ $app->get('/item/{item}', function($request, $response, $args) {
 });
 
 $app->get('/merchant/{char}', function ($request, $response, $args) {
-  return $response->withJson(Char::where('name', $args['char'])->first()->store());
+  $char = Char::where('name', $args['char'])->first();
+  return is_null($char) ? $response->withStatus(404) : $response->withJson($char->store());
 });
 
 $app->run();
