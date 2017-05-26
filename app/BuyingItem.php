@@ -11,7 +11,11 @@ class BuyingItem extends Model {
     'item_id'
   ];
 
-  protected $appends = ['attributes'];
+  protected $appends = ['attributes', 'offer_id'];
+
+  function getOfferidAttribute() {
+    return $this->buyingstore_id;
+  }
 
   function getAttributesAttribute() {
     return (object) [

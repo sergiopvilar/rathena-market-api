@@ -27,12 +27,12 @@ class Char extends Model {
 
   public function store() {
 
-    $output = ['data' => []];
+    $output = [];
 
     if(!is_null($this->buying)) {
-      $output = ['type' => 'buying', 'data' => $this->buying->load('char', 'items')];
+      $output = $this->buying->load('char', 'items');
     } else if(!is_null($this->vending)) {
-      $output = ['type' => 'vending', 'data' => $this->vending->load('char', 'items', 'items.attributes')];
+      $output = $this->vending->load('char', 'items', 'items.attributes');
     }
 
     return (object) $output;
