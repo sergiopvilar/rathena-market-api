@@ -24,7 +24,7 @@ class Vending extends Model {
   }
 
   public function getTypeAttribute() {
-    return 'selling';
+    return 'vending';
   }
 
   public static function item($item) {

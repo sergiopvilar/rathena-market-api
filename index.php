@@ -15,20 +15,20 @@ $capsule->bootEloquent();
 
 $app->get('/', function($request, $response) {
   return $response->withJson((object) [
-    'buying' => BuyingStore::all()->map(function($store) {
+    'buyings' => BuyingStore::all()->map(function($store) {
       return $store->load('char', 'items');
     }),
-    'selling' => Vending::all()->map(function($store) {
+    'vendings' => Vending::all()->map(function($store) {
       return $store->load('char', 'items', 'items.attributes');
     })
   ]);
 });
 
-$app->get('/selling/{item}', function($request, $response, $args) {
+$app->get('/vending/{item}', function($request, $response, $args) {
   return $response->withJson(Vending::item($args['item']));
 });
 
-$app->get('/selling', function ($request, $response) {
+$app->get('/vending', function ($request, $response) {
   return $response->withJson(Vending::all()->map(function($store) {
     return $store->load('char', 'items', 'items.attributes');
   }));
@@ -47,7 +47,7 @@ $app->get('/buying', function ($request, $response) {
 $app->get('/item/{item}', function($request, $response, $args) {
   return $response->withJson((object) [
     'buying' => BuyingStore::item($args['item']),
-    'selling' => Vending::item($args['item'])
+    'vending' => Vending::item($args['item'])
   ]);
 });
 

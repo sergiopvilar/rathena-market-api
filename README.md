@@ -27,13 +27,13 @@ A simple API to retrieve market data in ragnarok online servers powered by rAthe
 Retrieve all vending and buying stores in the server.
 
 #### [GET] /item/:item_id
-Retrieve all stores in the server that are buying or selling the item.
+Retrieve all stores in the server that are buying or vending the item.
 
-#### [GET] /selling
+#### [GET] /vending
 Retrieve all vendings in the server
 
-#### [GET] /selling/:item_id
-Retrieve all vendings who were selling the respective item.
+#### [GET] /vending/:item_id
+Retrieve all vendings who were vending the respective item.
 
 #### [GET] /buying
 Retrieve all Buying Stores in the server
@@ -81,9 +81,9 @@ Example buying output:
 }
 ```
 
-Example selling output:
+Example vending output:
 
-/merchant/SellingMerchant
+/merchant/vendingMerchant
 
 ```json
 {
@@ -96,7 +96,7 @@ Example selling output:
     "title": "Armas",
     "autotrade": 0,
     "char": {
-      "name": "SellingMerchant",
+      "name": "vendingMerchant",
       "class": 4011,
       "base_level": 1,
       "job_level": 1
